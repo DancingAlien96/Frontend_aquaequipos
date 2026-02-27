@@ -1,131 +1,259 @@
-# Frontend AquaEquipos - Next.js
+# 🚀 Frontend AquaEquipos
 
-Frontend moderno para AquaEquipos construido con Next.js 15, TypeScript y Tailwind CSS.
+E-commerce moderno para AquaEquipos construido con Next.js 15, React 19, TypeScript y Tailwind CSS.
 
-## 🚀 Características
+## ✨ Características Principales
 
-- **Next.js 15** con App Router
-- **TypeScript** para tipado estático
-- **Tailwind CSS** para estilos
+### 🛍️ E-commerce Completo
+- **Catálogo de productos** con WooCommerce integration
+- **Carrito de compras** persistente (SQLite + localStorage)
+- **Sistema de favoritos** con base de datos
+- **Checkout completo** con validación de formularios
+- **Integración TiloPay** para pagos en línea
+- **Filtros de productos** (precio, disponibilidad, ofertas)
+
+### 🔐 Autenticación
+- **Firebase Authentication** (Email/Password y Google)
+- **Gestión de sesiones** con React Context
+- **Perfil de usuario** editable
+- **Recuperación de contraseña**
+
+### 🎨 UI/UX Moderna
+- **Diseño dark theme** profesional
+- **Responsive design** (móvil, tablet, desktop)
+- **Animaciones suaves** y transiciones
 - **Optimización de imágenes** con Next.js Image
-- **Server-Side Rendering (SSR)** y Static Site Generation (SSG)
-- **Integración con WooCommerce** a través del backend
+- **Toast notifications** para feedback
+
+### ⚡ Performance
+- **Server-Side Rendering (SSR)** para SEO
+- **Client-Side Rendering (CSR)** para interactividad
+- **Code splitting** automático
+- **Image optimization** automática
+
+## �️ Stack Tecnológico
+
+- **Framework:** Next.js 15.2.3 (App Router)
+- **UI Library:** React 19
+- **Language:** TypeScript 5
+- **Styling:** Tailwind CSS 3.4
+- **Authentication:** Firebase 10.7
+- **State Management:** React Context API
+- **Image Optimization:** Next.js Image
+- **HTTP Client:** Fetch API
 
 ## 📁 Estructura del Proyecto
 
 ```
-src/
-├── app/                    # App Router de Next.js
-│   ├── layout.tsx         # Layout principal
-│   ├── page.tsx           # Página de inicio
-│   └── globals.css        # Estilos globales
-├── components/            # Componentes reutilizables
-│   ├── Hero.tsx
-│   ├── Features.tsx
-│   ├── FeaturedProducts.tsx
-│   ├── ProductCard.tsx
-│   ├── Brands.tsx
-│   └── Contact.tsx
-├── lib/                   # Utilidades y API clients
-│   └── api.ts            # Cliente API
-└── types/                 # Tipos TypeScript
-    └── index.ts
+frontend-aquaequipos/
+├── public/
+│   ├── logo.png
+│   └── brands/              # Logos de marcas
+├── src/
+│   ├── app/                 # App Router de Next.js
+│   │   ├── layout.tsx       # Layout principal con providers
+│   │   ├── page.tsx         # Página de inicio
+│   │   ├── carrito/         # Página del carrito
+│   │   ├── checkout/        # Página de checkout
+│   │   ├── favoritos/       # Página de favoritos
+│   │   ├── categoria/       # Páginas dinámicas de categorías
+│   │   ├── categorias/      # Listado de categorías
+│   │   ├── login/           # Login con Firebase
+│   │   ├── registro/        # Registro de usuarios
+│   │   ├── perfil/          # Perfil de usuario
+│   │   └── pago-completado/ # Confirmación de pago
+│   ├── components/          # Componentes reutilizables
+│   │   ├── Navbar.tsx       # Navegación principal
+│   │   ├── Footer.tsx       # Pie de página
+│   │   ├── ProductCard.tsx  # Tarjeta de producto
+│   │   ├── ProductFilters.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Features.tsx
+│   │   └── ...
+│   ├── contexts/            # React Context providers
+│   │   ├── AuthContext.tsx
+│   │   ├── CartContext.tsx
+│   │   ├── FavoritesContext.tsx
+│   │   └── ToastContext.tsx
+│   ├── lib/                 # Utilities y API clients
+│   │   ├── api.ts          # Funciones para llamadas al backend
+│   │   └── firebase.ts     # Configuración de Firebase
+│   └── types/              # Tipos TypeScript
+│       └── index.ts
+├── .env.example            # Variables de entorno de ejemplo
+├── next.config.ts          # Configuración de Next.js
+├── tailwind.config.ts      # Configuración de Tailwind
+└── tsconfig.json           # Configuración de TypeScript
 ```
 
-## 🛠️ Instalación
+## � Instalación y Configuración
 
-1. Instalar dependencias:
+### Prerrequisitos
+
+- Node.js 18.x o superior
+- npm o yarn
+- Backend de AquaEquipos corriendo en puerto 4000
+- Cuenta de Firebase configurada
+
+### Paso 1: Clonar el repositorio
+
+```bash
+git clone https://github.com/DancingAlien96/Frontend_aquaequipos.git
+cd Frontend_aquaequipos
+```
+
+### Paso 2: Instalar dependencias
+
 ```bash
 npm install
 ```
 
-2. Crear archivo `.env.local` basado en `.env.example`:
-```bash
-cp .env.example .env.local
-```
+### Paso 3: Configurar variables de entorno
 
-3. Configurar variables de entorno en `.env.local`:
+Crear archivo `.env.local` con las siguientes variables:
+
 ```env
+# API Backend
 NEXT_PUBLIC_API_URL=http://localhost:4000
-NEXT_PUBLIC_WOOCOMMERCE_URL=https://aquaequipos.com
+
+# Firebase Configuration
+NEXT_PUBLIC_FIREBASE_API_KEY=tu_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=tu_proyecto.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=tu_proyecto_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=tu_proyecto.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=tu_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=tu_app_id
 ```
 
-## 🏃 Desarrollo
+### Paso 4: Ejecutar en desarrollo
 
-Iniciar servidor de desarrollo:
 ```bash
 npm run dev
 ```
 
-El sitio estará disponible en [http://localhost:3000](http://localhost:3000)
+El frontend estará disponible en `http://localhost:3000`
 
-## 🏗️ Build
+### Paso 5: Build para producción
 
-Construir para producción:
 ```bash
 npm run build
-```
-
-Iniciar servidor de producción:
-```bash
 npm start
 ```
 
-## 📦 Próximas Funcionalidades
+## 📚 Características Implementadas
 
-- [ ] Sistema de carrito de compras
-- [ ] Página de productos con filtros
-- [ ] Página de detalle de producto
-- [ ] Sistema de checkout
-- [ ] Autenticación de usuarios
-- [ ] Panel de usuario
-- [ ] Sistema de búsqueda
-- [ ] Integración con pasarelas de pago
+### 🛒 Sistema de Carrito
+- Persistencia en SQLite (usuarios logueados)
+- Fallback a localStorage (invitados)
+- Migración automática al iniciar sesión
+- Sincronización en tiempo real
 
-## 🔗 API Endpoints del Backend
+### ❤️ Sistema de Favoritos  
+- Base de datos SQLite
+- Contador en tiempo real
+- Vista dedicada con grid de productos
+- Integración con ProductCard
 
-El frontend consume los siguientes endpoints del backend:
+### 💳 Checkout y Pagos
+- Formulario completo de facturación/envío
+- Integración con TiloPay (Guatemala)
+- Confirmación de órdenes en WooCommerce
+- Página de confirmación de pago
 
-- `GET /api/products` - Lista de productos
-- `GET /api/products/:slug` - Detalle de producto
-- `GET /api/categories` - Lista de categorías
-- `POST /api/orders` - Crear orden
+### 🔍 Filtros de Productos
+- Rango de precio (min/max)
+- Estado (en stock, en oferta)
+- Ordenamiento (precio, nombre, fecha)
+- Paginación
 
-## 📝 Componentes Principales
+### 👤 Gestión de Usuario
+- Registro con email/contraseña
+- Login con Google
+- Perfil editable
+- Recuperación de contraseña
 
-### Hero
-Banner principal con llamada a la acción.
+## 🔗 Integración con Backend
 
-### Features
-Sección de características/ventajas (Expertos en Agua, Mejores Precios, etc.).
+El frontend consume el [backend de AquaEquipos](https://github.com/DancingAlien96/backend-aquaequipos):
 
-### FeaturedProducts
-Muestra productos destacados desde WooCommerce.
+### Endpoints principales:
+- **Productos:** `GET /api/products`, `GET /api/products?category=X`
+- **Categorías:** `GET /api/categories`
+- **Carrito:** `GET/POST/PUT/DELETE /api/cart`
+- **Favoritos:** `GET/POST/DELETE /api/favorites`
+- **Órdenes:** `POST /api/orders`
+- **TiloPay:** `POST /api/tilopay/create-payment`, `GET /api/tilopay/consult/:orderNumber`
+
+## 📱 Páginas Disponibles
+
+| Ruta | Descripción | Tipo |
+|------|-------------|------|
+| `/` | Página principal | SSR |
+| `/categorias` | Listado de categorías | CSR |
+| `/categoria/[slug]` | Productos por categoría | SSR |
+| `/carrito` | Carrito de compras | CSR |
+| `/checkout` | Proceso de pago | CSR |
+| `/favoritos` | Productos favoritos | CSR |
+| `/login` | Inicio de sesión | CSR |
+| `/registro` | Registro de usuario | CSR |
+| `/perfil` | Perfil de usuario | CSR |
+| `/pago-completado` | Confirmación de pago | CSR |
+
+## 🎨 Componentes Principales
+
+### Navbar
+- Búsqueda de productos
+- Iconos de carrito y favoritos con contadores
+- Menú de usuario con avatar
+- Responsive (móvil y desktop)
 
 ### ProductCard
-Tarjeta de producto reutilizable con imagen, precio y acciones.
+- Imagen optimizada con Next.js Image
+- Precio con detección de ofertas
+- Botones de favoritos y carrito
+- Link al detalle del producto
 
-### Brands
-Carrusel/grid de marcas representadas.
+### ProductFilters
+- Filtro por rango de precio
+- Ordenamiento múltiple
+- Checkbox de estado (stock, ofertas)
+- UI colapsable en móvil
 
-### Contact
-Sección de contacto con enlaces a redes sociales.
+### Contexts
+- **AuthContext:** Gestión de autenticación con Firebase
+- **CartContext:** Estado global del carrito
+- **FavoritesContext:** Estado global de favoritos
+- **ToastContext:** Notificaciones toast
 
-## 🎨 Personalización
+## 🚀 Scripts Disponibles
 
-Los colores principales se pueden modificar en `tailwind.config.ts`:
-
-```typescript
-theme: {
-  extend: {
-    colors: {
-      primary: '#0066cc',
-      secondary: '#00aaff',
-    },
-  },
-}
+```bash
+npm run dev      # Desarrollo en http://localhost:3000
+npm run build    # Build de producción
+npm run start    # Servidor de producción
+npm run lint     # Linting con ESLint
 ```
+
+## 🌐 Despliegue
+
+### Vercel (Recomendado)
+```bash
+vercel
+```
+
+### Docker
+```dockerfile
+# Próximamente
+```
+
+### Variables de entorno requeridas en producción:
+- `NEXT_PUBLIC_API_URL` - URL del backend
+- Variables de Firebase (todas las NEXT_PUBLIC_FIREBASE_*)
 
 ## 📄 Licencia
 
-Privado - AquaEquipos
+© 2026 AquaEquipos - Todos los derechos reservados
+
+---
+
+**Desarrollado con ❤️ por el equipo de AquaEquipos**
