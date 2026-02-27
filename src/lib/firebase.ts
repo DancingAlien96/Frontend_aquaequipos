@@ -3,13 +3,13 @@ import { getAuth } from 'firebase/auth';
 import { getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD5rqAE5gJXW8D-oNxvmv8X3Qoek5QEUTc",
-  authDomain: "frontend-aquaequipos.firebaseapp.com",
-  projectId: "frontend-aquaequipos",
-  storageBucket: "frontend-aquaequipos.firebasestorage.app",
-  messagingSenderId: "411256889270",
-  appId: "1:411256889270:web:3e3aaf0be3b828d1646b17",
-  measurementId: "G-WBL6KS9FTZ"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase solo si no está inicializado
