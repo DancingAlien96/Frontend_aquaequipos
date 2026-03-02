@@ -32,6 +32,7 @@ export default function CheckoutPage() {
   const [shippingData, setShippingData] = useState({
     first_name: '',
     last_name: '',
+    phone: '',
     address_1: '',
     address_2: '',
     city: '',
