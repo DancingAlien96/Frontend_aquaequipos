@@ -32,17 +32,19 @@ export default function Hero() {
           
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/productos"
+              href="/categorias"
               className="inline-block bg-blue-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-blue-700 transition text-center"
             >
               COMPRAR AHORA
             </Link>
-            <Link
-              href="/catalogo"
+            <a
+              href="https://drive.google.com/file/d/1vJRgjk79hH_CLP8wS9f_zbHR4g8l5Htr/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-3 rounded-md font-semibold hover:bg-white/20 transition text-center"
             >
               VER CATÁLOGO
-            </Link>
+            </a>
           </div>
         </div>
       </div>

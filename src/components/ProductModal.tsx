@@ -49,7 +49,7 @@ export default function ProductModal({ slug, onClose }: Props) {
 
       <div className="relative z-10 w-full max-w-3xl mx-4 bg-white rounded-lg shadow-lg overflow-hidden max-h-[90vh]">
         <div className="flex justify-between items-center p-4 border-b">
-          <h3 className="text-lg font-semibold truncate max-w-[80%]">{product?.name || 'Producto'}</h3>
+          <h3 className="text-lg font-semibold truncate max-w-[80%] text-gray-900">{product?.name || 'Producto'}</h3>
           <button onClick={onClose} aria-label="Cerrar" className="text-gray-600 hover:text-gray-900">✕</button>
         </div>
 
@@ -88,7 +88,7 @@ export default function ProductModal({ slug, onClose }: Props) {
 
                   <div className="mt-6 flex gap-3">
                     <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Añadir al carrito</button>
-                    <button onClick={onClose} className="px-4 py-2 border rounded">Cerrar</button>
+                    <button onClick={onClose} className="px-4 py-2 border rounded text-gray-900 font-medium hover:bg-gray-50">Cerrar</button>
                   </div>
                 </>
               ) : (

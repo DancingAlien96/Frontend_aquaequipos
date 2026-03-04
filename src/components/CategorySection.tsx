@@ -16,17 +16,17 @@ const categoryStyles: Record<string, { icon: string; color: string; image: strin
   'Filtración de Agua': { 
     icon: '💧', 
     color: 'from-blue-400 to-cyan-600',
-    image: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=400&fit=crop'
+    image: '/filtraciondeagua.jpg'
   },
   'Electricidad Industrial': { 
     icon: '⚡', 
     color: 'from-yellow-500 to-orange-600',
-    image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=400&fit=crop'
+    image: '/electricidadindustrial.jpg'
   },
   'Bombas de Agua': { 
     icon: '⚙️', 
     color: 'from-blue-600 to-blue-800',
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=400&fit=crop'
+    image: '/bombasdeagua.jpg'
   },
   'Equipamiento de Piscina': { 
     icon: '🏊', 
@@ -46,7 +46,12 @@ const categoryStyles: Record<string, { icon: string; color: string; image: strin
   'Calentadores': { 
     icon: '🔥', 
     color: 'from-red-400 to-orange-500',
-    image: 'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?w=400&h=400&fit=crop'
+    image: '/calentadores.jpg'
+  },
+  'Tubería': { 
+    icon: '🔩', 
+    color: 'from-teal-500 to-cyan-700',
+    image: '/tuberia.jpg'
   },
 };
 
@@ -84,7 +89,13 @@ export default function CategorySection() {
         
         // Filtrar categorías principales con productos y ordenar por count
         const mainCategories = (data.categories || [])
-          .filter((cat: WooCategory) => cat.parent === 0 && cat.count > 0)
+          .filter((cat: WooCategory) => 
+            cat.parent === 0 && 
+            cat.count > 0 && 
+            cat.slug !== 'uncategorized' && 
+            cat.slug !== 'sin-categoria' && 
+            cat.slug !== 'sincategoria'
+          )
           .sort((a: WooCategory, b: WooCategory) => b.count - a.count)
           .slice(0, 7); // Mostrar máximo 7 categorías
         

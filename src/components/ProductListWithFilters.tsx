@@ -100,11 +100,11 @@ export default function ProductListWithFilters({
         </div>
       ) : filteredProducts.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-lg shadow-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <p className="text-gray-600 text-lg mb-2">No se encontraron productos</p>
-          <p className="text-gray-500 text-sm">Intenta ajustar los filtros</p>
+          <p className="text-gray-800 text-lg font-semibold mb-2">No se encontraron productos</p>
+          <p className="text-gray-700 text-sm">Intenta ajustar los filtros</p>
         </div>
       ) : (
         <>
@@ -120,7 +120,7 @@ export default function ProductListWithFilters({
               <button
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-gray-900 font-medium"
               >
                 Anterior
               </button>
@@ -142,10 +142,10 @@ export default function ProductListWithFilters({
                     <button
                       key={pageNum}
                       onClick={() => setCurrentPage(pageNum)}
-                      className={`px-4 py-2 rounded-lg ${
+                      className={`px-4 py-2 rounded-lg font-medium ${
                         currentPage === pageNum
                           ? 'bg-blue-600 text-white'
-                          : 'bg-white border border-gray-300 hover:bg-gray-50'
+                          : 'bg-white border border-gray-300 hover:bg-gray-50 text-gray-900'
                       }`}
                     >
                       {pageNum}
@@ -157,7 +157,7 @@ export default function ProductListWithFilters({
               <button
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-gray-900 font-medium"
               >
                 Siguiente
               </button>

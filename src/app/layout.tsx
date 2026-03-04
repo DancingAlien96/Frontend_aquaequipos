@@ -5,6 +5,7 @@ import { FavoritesProvider } from '@/contexts/FavoritesContext';
 import { CartProvider } from '@/contexts/CartContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function RootLayout({
                     {children}
                   </main>
                   <Footer />
+                  <WhatsAppButton />
                 </div>
               </FavoritesProvider>
             </CartProvider>

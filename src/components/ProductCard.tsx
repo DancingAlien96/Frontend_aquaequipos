@@ -77,12 +77,12 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
         <div className="p-4">
-          <h3 className="font-semibold mb-2 line-clamp-2 min-h-[3rem]">
+          <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem]">
             {product.name}
           </h3>
           <div className="flex items-center gap-2">
             {product.on_sale && product.regular_price && (
-              <span className="text-gray-400 line-through text-sm">
+              <span className="text-gray-500 line-through text-sm font-medium">
                 {formatPrice(product.regular_price)}
               </span>
             )}
@@ -90,7 +90,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               {formatPrice(product.price)}
             </span>
           </div>
-          <p className="text-sm text-gray-500 mt-1">IVA Incluido</p>
+          <p className="text-sm text-gray-700 mt-1 font-medium">IVA Incluido</p>
           <div className="mt-4 flex flex-col gap-2">
             <div className="flex items-center gap-2">
               {user ? (
@@ -147,7 +147,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               )}
               <button
                 onClick={() => setOpen(true)}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition"
+                className="flex-1 px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition text-gray-900 font-medium"
               >
                 Ver
               </button>

@@ -23,7 +23,7 @@ export default async function CategoryPage({ params }: Props) {
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Categoría no encontrada</h1>
-            <p className="text-gray-600 mb-8">La categoría que buscas no existe.</p>
+            <p className="text-gray-700 mb-8 text-lg">La categoría que buscas no existe.</p>
             <a
               href="/"
               className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition"
@@ -52,9 +52,9 @@ export default async function CategoryPage({ params }: Props) {
             <h1 className="text-4xl font-bold text-gray-900 mb-4">{foundCategory.name}</h1>
             {/* description could be undefined */}
             {('description' in (foundCategory as any)) && (foundCategory as any).description && (
-              <p className="text-gray-600 max-w-3xl" dangerouslySetInnerHTML={{ __html: (foundCategory as any).description }}></p>
+              <p className="text-gray-700 max-w-3xl" dangerouslySetInnerHTML={{ __html: (foundCategory as any).description }}></p>
             )}
-            <p className="text-gray-500 mt-4">
+            <p className="text-gray-700 mt-4 font-medium">
               {('count' in (foundCategory as any) ? (foundCategory as any).count : products.length)} {products.length === 1 ? 'producto' : 'productos'}
             </p>
           </div>
@@ -64,7 +64,7 @@ export default async function CategoryPage({ params }: Props) {
         <div className="container mx-auto px-4 py-12">
           {products.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-600 text-lg">No hay productos disponibles en esta categoría.</p>
+              <p className="text-gray-800 text-lg font-semibold">No hay productos disponibles en esta categoría.</p>
             </div>
           ) : (
             <ProductListWithFilters 
@@ -82,8 +82,8 @@ export default async function CategoryPage({ params }: Props) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-semibold">Error cargando la categoría</h2>
-          <p className="text-gray-600">Intenta de nuevo más tarde.</p>
+          <h2 className="text-2xl font-semibold text-gray-900">Error cargando la categoría</h2>
+          <p className="text-gray-700 text-lg mt-2">Intenta de nuevo más tarde.</p>
         </div>
       </div>
     );
