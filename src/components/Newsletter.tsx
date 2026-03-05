@@ -1,25 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-
 export default function Newsletter() {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('loading');
-
-    // Simular envío (aquí integrarías con tu servicio de email)
-    setTimeout(() => {
-      setStatus('success');
-      setEmail('');
-      setTimeout(() => setStatus('idle'), 3000);
-    }, 1000);
-  };
+  const categories = [
+    { name: 'Filtración de Agua', image: '/filtraciondeagua.jpg', color: 'from-blue-400 to-cyan-600' },
+    { name: 'Electricidad Industrial', image: '/electricidadindustrial.jpg', color: 'from-yellow-500 to-orange-600' },
+    { name: 'Bombas de Agua', image: '/bombasdeagua.jpg', color: 'from-blue-600 to-blue-800' },
+    { name: 'Calentadores', image: '/calentadores.jpg', color: 'from-red-400 to-orange-500' },
+    { name: 'Tubería', image: '/tuberia.jpg', color: 'from-teal-500 to-cyan-700' },
+    { name: 'Herramientas Eléctricas', image: '/herramientaselectricas.jpg', color: 'from-amber-500 to-yellow-600' },
+  ];
 
   return (
-    <section className="relative py-16 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white overflow-hidden">
+    <section className="relative py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -28,65 +20,78 @@ export default function Newsletter() {
       </div>
 
       <div className="relative container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="mb-6">
-            <span className="inline-block bg-blue-600/50 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              🌊 Newsletter
-            </span>
-          </div>
-          
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            ÚNETE A LA COMUNIDAD DE<br />
-            <span className="text-blue-400">AQUAEXPERTS</span>
+        <div className="max-w-5xl mx-auto text-center mb-12">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            EXPERTOS EN SOLUCIONES<br />
+            <span className="text-blue-400">INDUSTRIALES</span>
           </h2>
           
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Recibe ofertas exclusivas, guías técnicas y acceso anticipado a nuevos
-            lanzamientos de equipos industriales directamente en tu bandeja de entrada.
+          <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto">
+            Encontrá todo lo que necesitás para tus proyectos industriales con la mejor calidad y garantía
           </p>
+        </div>
 
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Introduce tu correo corporativo"
-                required
-                className="flex-1 px-6 py-3 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-md font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+        {/* Carrusel de imágenes */}
+        <div className="relative mt-8">
+          <div className="flex gap-6 animate-scroll">
+            {/* Primera serie de imágenes */}
+            {categories.map((category, index) => (
+              <div
+                key={`cat-1-${index}`}
+                className="flex-shrink-0 w-80 h-64 relative rounded-2xl overflow-hidden shadow-2xl"
               >
-                {status === 'loading' ? 'Enviando...' : 'SUSCRIBIRSE'}
-              </button>
-            </div>
-            
-            {status === 'success' && (
-              <p className="mt-4 text-green-400 font-medium">
-                ✓ ¡Gracias por suscribirte! Revisa tu correo.
-              </p>
-            )}
-            
-            <p className="mt-4 text-xs text-gray-400">
-              Al suscribirte, aceptas nuestros{' '}
-              <a href="/terminos" className="underline hover:text-white">
-                Términos de Servicio
-              </a>{' '}
-              y{' '}
-              <a href="/privacidad" className="underline hover:text-white">
-                Política de Privacidad
-              </a>
-            </p>
-          </form>
+                <img
+                  src={category.image}
+                  alt={category.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                  <h3 className="text-2xl font-bold text-white">{category.name}</h3>
+                </div>
+              </div>
+            ))}
+            {/* Segunda serie de imágenes para loop continuo */}
+            {categories.map((category, index) => (
+              <div
+                key={`cat-2-${index}`}
+                className="flex-shrink-0 w-80 h-64 relative rounded-2xl overflow-hidden shadow-2xl"
+              >
+                <img
+                  src={category.image}
+                  alt={category.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                  <h3 className="text-2xl font-bold text-white">{category.name}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 }

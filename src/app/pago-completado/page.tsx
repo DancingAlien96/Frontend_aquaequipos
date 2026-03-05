@@ -14,9 +14,15 @@ export default function PagoCompletadoPage() {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [orderId, setOrderId] = useState<string>('');
   const [message, setMessage] = useState<string>('');
+  const [processedRef, setProcessedRef] = useState<boolean>(false);
 
   useEffect(() => {
     const processPayment = async () => {
+      // Evitar procesamiento duplicado
+      if (processedRef) {
+        return;
+      }
+
       // Parámetros de TiloPay
       const code = searchParams.get('code');
       const description = searchParams.get('description');
@@ -34,6 +40,21 @@ export default function PagoCompletadoPage() {
       // code = 1 significa aprobado
       if (code === '1') {
         try {
+          // Marcar como procesado antes de crear la orden
+          setProcessedRef(true);
+
+          // Verificar si ya se procesó esta transacción
+          const processedKey = `tilopay_processed_${tilopayTransaction || tilopayOrder}`;
+          const alreadyProcessed = sessionStorage.getItem(processedKey);
+
+          if (alreadyProcessed) {
+            console.log('Esta transacción ya fue procesada anteriormente');
+            setStatus('success');
+            setOrderId(alreadyProcessed);
+            setMessage('Pago procesado exitosamente');
+            return;
+          }
+
           // Obtener datos de la orden pendiente
           const pendingOrderStr = localStorage.getItem('pending_order');
           
@@ -75,6 +96,10 @@ export default function PagoCompletadoPage() {
           if (response.ok) {
             const result = await response.json();
             setOrderId(result.order.id);
+            
+            // Guardar en sessionStorage para evitar duplicados
+            sessionStorage.setItem(processedKey, result.order.id);
+            
             // Limpiar localStorage
             localStorage.removeItem('pending_order');
             // Limpiar carrito
@@ -96,7 +121,7 @@ export default function PagoCompletadoPage() {
     };
 
     processPayment();
-  }, [searchParams, user, clearCart]);
+  }, [searchParams, user, clearCart, processedRef]);
 
   if (status === 'loading') {
     return (

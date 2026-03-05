@@ -55,6 +55,11 @@ const categoryStyles: Record<string, { icon: string; color: string; image: strin
     color: 'from-teal-500 to-cyan-700',
     image: '/tuberia.jpg'
   },
+  'Herramientas Eléctricas': { 
+    icon: '🔌', 
+    color: 'from-amber-500 to-yellow-600',
+    image: '/herramientaselectricas.jpg'
+  },
   'Suavizadores': { 
     icon: '💎', 
     color: 'from-teal-400 to-cyan-600',

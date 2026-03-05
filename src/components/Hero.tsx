@@ -17,7 +17,7 @@ export default function Hero() {
       <div className="relative container mx-auto px-4 py-24 md:py-32 lg:py-40">
         <div className="max-w-2xl">
           <div className="inline-block bg-blue-600/90 px-4 py-2 rounded-md text-sm font-semibold mb-4">
-            SUMMER PROMO
+            PROMOCIÓN DE VERANO
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
@@ -26,7 +26,7 @@ export default function Hero() {
           </h1>
           
           <p className="text-lg md:text-xl mb-8 text-gray-200">
-            Ahorra hasta un 35% en bombas de piscina de alta eficiencia
+            Ahorra hasta un 15% en bombas de piscina de alta eficiencia
             y sistemas de filtración esta temporada.
           </p>
           

@@ -53,6 +53,11 @@ const categoryStyles: Record<string, { icon: string; color: string; image: strin
     color: 'from-teal-500 to-cyan-700',
     image: '/tuberia.jpg'
   },
+  'Herramientas Eléctricas': { 
+    icon: '🔌', 
+    color: 'from-amber-500 to-yellow-600',
+    image: '/herramientaselectricas.jpg'
+  },
 };
 
 // Función para obtener estilo por defecto
@@ -117,7 +122,7 @@ export default function CategorySection() {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
             COMPRA POR CATEGORÍA
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 md:gap-8">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
             {[...Array(7)].map((_, i) => (
               <div key={i} className="flex flex-col items-center">
                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gray-200 animate-pulse"></div>
@@ -137,7 +142,7 @@ export default function CategorySection() {
           COMPRA POR CATEGORÍA
         </h2>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 md:gap-8">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
           {categories.map((category) => {
             const style = categoryStyles[category.name] || getDefaultStyle(category.name);
             
@@ -153,7 +158,6 @@ export default function CategorySection() {
                     alt={category.name}
                     className="w-full h-full object-cover"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${style.color} opacity-30 group-hover:opacity-20 transition-opacity duration-300`}></div>
                 </div>
                 <span className="mt-4 text-sm md:text-base font-medium text-gray-700 text-center group-hover:text-blue-600 transition-colors">
                   {category.name}

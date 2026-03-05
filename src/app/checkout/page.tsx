@@ -209,7 +209,7 @@ export default function CheckoutPage() {
 
   if (!user) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center px-4">
+      <div className="min-h-[60vh] flex flex-col items-center justify-center px-4 bg-white">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Inicia sesión para continuar</h1>
           <button
@@ -225,7 +225,7 @@ export default function CheckoutPage() {
 
   if (itemsCount === 0) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center px-4">
+      <div className="min-h-[60vh] flex flex-col items-center justify-center px-4 bg-white">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Tu carrito está vacío</h1>
           <button
@@ -240,7 +240,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 bg-white min-h-screen">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">Finalizar compra</h1>
 
       <form onSubmit={handleSubmit}>
@@ -248,7 +248,7 @@ export default function CheckoutPage() {
           {/* Billing & Shipping Forms */}
           <div className="lg:col-span-2 space-y-6">
             {/* Billing Information */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
+            <div className="bg-white rounded-lg border-2 border-gray-800 p-6">
               <h2 className="text-xl font-bold text-gray-800 mb-4">Información de facturación</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -379,7 +379,7 @@ export default function CheckoutPage() {
             </div>
 
             {/* Shipping Information */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
+            <div className="bg-white rounded-lg border-2 border-gray-800 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold text-gray-800">Información de envío</h2>
                 <label className="flex items-center gap-2 cursor-pointer">
@@ -495,7 +495,7 @@ export default function CheckoutPage() {
             </div>
 
             {/* Payment Method */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
+            <div className="bg-white rounded-lg border-2 border-gray-800 p-6">
               <h2 className="text-xl font-bold text-gray-800 mb-4">Método de pago</h2>
               
               <div className="space-y-3">
@@ -556,7 +556,7 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+            <div className="bg-white rounded-lg border-2 border-gray-800 p-6 sticky top-4">
               <h2 className="text-xl font-bold text-gray-800 mb-4">Tu pedido</h2>
               
               <div className="space-y-3 mb-4 max-h-64 overflow-y-auto">
