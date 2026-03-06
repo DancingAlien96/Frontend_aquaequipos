@@ -489,14 +489,6 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-
-            {/* Enlaces adicionales */}
-            <Link href="/categorias" className="text-sm text-gray-300 hover:text-white transition">
-              Categorías
-            </Link>
-            <Link href="/contacto" className="text-sm text-gray-300 hover:text-white transition">
-              Contacto
-            </Link>
             </div>
 
             {/* Right: Envío a todo el país */}
