@@ -93,7 +93,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <p className="text-sm text-gray-700 mt-1 font-medium">IVA Incluido</p>
           <div className="mt-4 flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              {user ? (
+              {user && (
                 <button
                   onClick={async () => {
                     if (!user) return router.push('/login');
@@ -142,8 +142,6 @@ export default function ProductCard({ product }: ProductCardProps) {
                     <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 18.657l-6.828-7.829a4 4 0 010-5.656z" />
                   </svg>
                 </button>
-              ) : (
-                <Link href="/login" className="p-2 rounded-full hover:bg-gray-100 text-sm text-gray-700">Iniciar sesión</Link>
               )}
               <button
                 onClick={() => setOpen(true)}
@@ -154,12 +152,16 @@ export default function ProductCard({ product }: ProductCardProps) {
             </div>
             <button
               onClick={async () => {
-                try {
-                  await addItem(product, 1);
-                  showToast('✓ Agregado al carrito', 'success');
-                } catch (error) {
-                  console.error('Error adding to cart:', error);
-                  showToast('❌ Error al agregar al carrito', 'error');
+                if (isInCart(product.id)) {
+                  router.push('/carrito');
+                } else {
+                  try {
+                    await addItem(product, 1);
+                    showToast('✓ Agregado al carrito', 'success');
+                  } catch (error) {
+                    console.error('Error adding to cart:', error);
+                    showToast('❌ Error al agregar al carrito', 'error');
+                  }
                 }
               }}
               className={`w-full py-2 rounded transition ${
@@ -168,7 +170,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                   : 'bg-blue-600 hover:bg-blue-700 text-white'
               }`}
             >
-              {isInCart(product.id) ? '✓ En el carrito' : 'Agregar al carrito'}
+              {isInCart(product.id) ? 'Ver en carrito' : 'Agregar al carrito'}
             </button>
           </div>
         </div>

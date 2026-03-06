@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/contexts/ToastContext';
@@ -19,7 +19,7 @@ export default function CheckoutPage() {
   const [billingData, setBillingData] = useState({
     first_name: '',
     last_name: '',
-    email: user?.email || '',
+    email: '',
     phone: '',
     address_1: '',
     address_2: '',
@@ -40,6 +40,36 @@ export default function CheckoutPage() {
     postcode: '',
     country: 'GT',
   });
+
+  // Auto-llenar campos cuando el usuario inicie sesión
+  useEffect(() => {
+    if (user) {
+      // Extraer nombre y apellido del displayName
+      const displayName = user.displayName || '';
+      const nameParts = displayName.trim().split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+
+      // Actualizar datos de facturación con información de Google
+      setBillingData(prev => ({
+        ...prev,
+        first_name: firstName,
+        last_name: lastName,
+        email: user.email || '',
+        phone: user.phoneNumber || '',
+      }));
+
+      // Si está marcado "mismo que envío", actualizar también shipping
+      if (sameAsShipping) {
+        setShippingData(prev => ({
+          ...prev,
+          first_name: firstName,
+          last_name: lastName,
+          phone: user.phoneNumber || '',
+        }));
+      }
+    }
+  }, [user, sameAsShipping]);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-GT', {
@@ -262,7 +292,7 @@ export default function CheckoutPage() {
                     value={billingData.first_name}
                     onChange={handleBillingChange}
                     required
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 
@@ -276,7 +306,7 @@ export default function CheckoutPage() {
                     value={billingData.last_name}
                     onChange={handleBillingChange}
                     required
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 
@@ -290,7 +320,7 @@ export default function CheckoutPage() {
                     value={billingData.email}
                     onChange={handleBillingChange}
                     required
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 
@@ -304,7 +334,7 @@ export default function CheckoutPage() {
                     value={billingData.phone}
                     onChange={handleBillingChange}
                     required
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 
@@ -318,7 +348,7 @@ export default function CheckoutPage() {
                     value={billingData.address_1}
                     onChange={handleBillingChange}
                     required
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 
@@ -331,7 +361,7 @@ export default function CheckoutPage() {
                     name="address_2"
                     value={billingData.address_2}
                     onChange={handleBillingChange}
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 
@@ -345,7 +375,7 @@ export default function CheckoutPage() {
                     value={billingData.city}
                     onChange={handleBillingChange}
                     required
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 
@@ -359,7 +389,7 @@ export default function CheckoutPage() {
                     value={billingData.state}
                     onChange={handleBillingChange}
                     required
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 
@@ -372,7 +402,7 @@ export default function CheckoutPage() {
                     name="postcode"
                     value={billingData.postcode}
                     onChange={handleBillingChange}
-                    className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -405,7 +435,7 @@ export default function CheckoutPage() {
                       value={shippingData.first_name}
                       onChange={handleShippingChange}
                       required
-                      className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   
@@ -419,7 +449,7 @@ export default function CheckoutPage() {
                       value={shippingData.last_name}
                       onChange={handleShippingChange}
                       required
-                      className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   
@@ -433,7 +463,7 @@ export default function CheckoutPage() {
                       value={shippingData.address_1}
                       onChange={handleShippingChange}
                       required
-                      className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   
@@ -446,7 +476,7 @@ export default function CheckoutPage() {
                       name="address_2"
                       value={shippingData.address_2}
                       onChange={handleShippingChange}
-                      className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   
@@ -460,7 +490,7 @@ export default function CheckoutPage() {
                       value={shippingData.city}
                       onChange={handleShippingChange}
                       required
-                      className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   
@@ -474,7 +504,7 @@ export default function CheckoutPage() {
                       value={shippingData.state}
                       onChange={handleShippingChange}
                       required
-                      className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                   
@@ -487,7 +517,7 @@ export default function CheckoutPage() {
                       name="postcode"
                       value={shippingData.postcode}
                       onChange={handleShippingChange}
-                      className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                 </div>

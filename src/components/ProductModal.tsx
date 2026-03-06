@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Product } from '@/types';
+import { useCart } from '@/contexts/CartContext';
+import { useToast } from '@/contexts/ToastContext';
 
 interface Props {
   slug: string;
@@ -15,6 +18,9 @@ export default function ProductModal({ slug, onClose }: Props) {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { addItem, isInCart } = useCart();
+  const { showToast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     let mounted = true;
@@ -87,7 +93,24 @@ export default function ProductModal({ slug, onClose }: Props) {
                   <div className="prose max-w-none text-gray-700 mb-6" dangerouslySetInnerHTML={{ __html: product.description || product.short_description || '' }} />
 
                   <div className="mt-6 flex gap-3">
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Añadir al carrito</button>
+                    <button 
+                      onClick={() => {
+                        if (isInCart(product.id)) {
+                          router.push('/carrito');
+                          onClose();
+                        } else {
+                          addItem(product, 1);
+                          showToast('✓ Agregado al carrito', 'success');
+                        }
+                      }}
+                      className={`px-4 py-2 rounded transition ${
+                        isInCart(product.id)
+                          ? 'bg-green-500 hover:bg-green-600 text-white'
+                          : 'bg-blue-600 hover:bg-blue-700 text-white'
+                      }`}
+                    >
+                      {isInCart(product.id) ? 'Ver en carrito' : 'Añadir al carrito'}
+                    </button>
                     <button onClick={onClose} className="px-4 py-2 border rounded text-gray-900 font-medium hover:bg-gray-50">Cerrar</button>
                   </div>
                 </>

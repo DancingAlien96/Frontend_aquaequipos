@@ -113,19 +113,19 @@ export default function CarritoPage() {
 
                 {/* Quantity Controls */}
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center border border-gray-300 rounded">
+                  <div className="flex items-center border-2 border-gray-800 rounded-lg">
                     <button
                       onClick={() => handleQuantityChange(item.product.id, item.quantity - 1)}
-                      className="px-3 py-1 hover:bg-gray-100 transition"
+                      className="px-4 py-2 text-gray-900 font-bold hover:bg-gray-100 transition"
                     >
                       -
                     </button>
-                    <span className="px-4 py-1 border-x border-gray-300 min-w-[3rem] text-center">
+                    <span className="px-6 py-2 font-semibold text-gray-900 border-x-2 border-gray-800 min-w-[3rem] text-center">
                       {item.quantity}
                     </span>
                     <button
                       onClick={() => handleQuantityChange(item.product.id, item.quantity + 1)}
-                      className="px-3 py-1 hover:bg-gray-100 transition"
+                      className="px-4 py-2 text-gray-900 font-bold hover:bg-gray-100 transition"
                     >
                       +
                     </button>
