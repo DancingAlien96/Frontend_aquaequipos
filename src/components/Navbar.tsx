@@ -346,99 +346,15 @@ export default function Navbar() {
 
   return (
     <nav className="bg-gray-900 text-white">
+      {/* Primera sección: Logo, Búsqueda, Carrito y Perfil */}
       <div className="bg-gray-900 border-b border-gray-800">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-3">
-            {/* Left: logo + Tienda dropdown */}
-            <div className="flex items-center gap-4">
+            {/* Left: logo */}
+            <div className="flex items-center">
               <Link href="/" className="flex items-center gap-3">
                 <Image src="/logo.png" alt="AQUAEQUIPOS" width={140} height={36} className="object-contain" />
               </Link>
-              
-              {/* Tienda dropdown button */}
-              <div className="relative hidden lg:block" ref={categoriesMenuRef}>
-                <button
-                  onClick={() => setShowCategoriesMenu(!showCategoriesMenu)}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                  <span className="text-sm font-medium">Tienda</span>
-                  <svg className={`w-4 h-4 transition-transform ${showCategoriesMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-
-                {/* Dropdown menu */}
-                {showCategoriesMenu && mainCategories.length > 0 && (
-                  <div className="absolute top-full left-0 mt-2 bg-gray-800 rounded-lg shadow-2xl z-50 min-w-[700px] border border-gray-700">
-                    <div className="grid grid-cols-2 gap-0">
-                      {/* Left column: Main categories */}
-                      <div className="space-y-1 p-3 border-r border-gray-700">
-                        {mainCategories.map((cat) => {
-                          const subcats = getSubcategories(cat.id);
-                          return (
-                            <div key={cat.id}>
-                              <Link
-                                href={`/categoria/${cat.slug}`}
-                                className={`flex items-center justify-between px-4 py-2.5 rounded-md transition-colors ${
-                                  hoveredCategoryId === cat.id ? 'bg-gray-700' : 'hover:bg-gray-700'
-                                }`}
-                                onClick={() => setShowCategoriesMenu(false)}
-                                onMouseEnter={() => setHoveredCategoryId(cat.id)}
-                              >
-                                <span className="text-white font-medium">{cat.name}</span>
-                                {subcats.length > 0 && (
-                                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                  </svg>
-                                )}
-                              </Link>
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* Right column: Subcategories (shows for hovered category) */}
-                      <div className="p-3 min-h-[200px]">
-                        {hoveredCategoryId ? (
-                          <div className="space-y-1">
-                            {getSubcategories(hoveredCategoryId).map((subcat) => (
-                              <Link
-                                key={subcat.id}
-                                href={`/categoria/${subcat.slug}`}
-                                className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
-                                onClick={() => setShowCategoriesMenu(false)}
-                              >
-                                {subcat.name}
-                              </Link>
-                            ))}
-                            {getSubcategories(hoveredCategoryId).length === 0 && (
-                              <p className="px-4 py-2 text-sm text-gray-500 italic">No hay subcategorías</p>
-                            )}
-                          </div>
-                        ) : (
-                          <div className="flex items-center justify-center h-full text-gray-500 text-sm">
-                            <p>Pasa el mouse sobre una categoría para ver más opciones</p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    
-                    {/* View all categories link */}
-                    <div className="border-t border-gray-700 p-3">
-                      <Link
-                        href="/categorias"
-                        className="block text-center text-sm text-blue-400 hover:text-blue-300 font-medium"
-                        onClick={() => setShowCategoriesMenu(false)}
-                      >
-                        Ver todas las categorías →
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
             </div>
 
             {/* Center: search (hidden on small and tablet, visible on desktop) */}
@@ -448,8 +364,18 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Right: actions (visible on mobile and desktop) */}
+            {/* Right: envío info, carrito y perfil */}
             <div className="flex items-center gap-3 sm:gap-6">
+              {/* Envío a todo el país - solo desktop */}
+              <div className="hidden lg:flex items-center gap-2 text-gray-300">
+                <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span className="text-sm font-medium">Envío a todo el país</span>
+              </div>
+
+              <div className="hidden lg:block w-px h-6 bg-gray-700"></div>
+
               <Link href="/carrito" className="relative text-white hover:text-blue-300">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -478,8 +404,107 @@ export default function Navbar() {
                   </Link>
                 )}
               </div>
-
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Segunda sección: Tienda y otros links (solo desktop) */}
+      <div className="hidden lg:block bg-gray-900 border-b border-gray-800">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center gap-6 py-2">
+            {/* Tienda dropdown button */}
+            <div className="relative" ref={categoriesMenuRef}>
+              <button
+                onClick={() => setShowCategoriesMenu(!showCategoriesMenu)}
+                className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <span className="text-sm font-medium">Tienda</span>
+                <svg className={`w-4 h-4 transition-transform ${showCategoriesMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {/* Dropdown menu */}
+              {showCategoriesMenu && mainCategories.length > 0 && (
+                <div className="absolute top-full left-0 mt-2 bg-gray-800 rounded-lg shadow-2xl z-50 min-w-[700px] border border-gray-700">
+                  <div className="grid grid-cols-2 gap-0">
+                    {/* Left column: Main categories */}
+                    <div className="space-y-1 p-3 border-r border-gray-700">
+                      {mainCategories.map((cat) => {
+                        const subcats = getSubcategories(cat.id);
+                        return (
+                          <div key={cat.id}>
+                            <Link
+                              href={`/categoria/${cat.slug}`}
+                              className={`flex items-center justify-between px-4 py-2.5 rounded-md transition-colors ${
+                                hoveredCategoryId === cat.id ? 'bg-gray-700' : 'hover:bg-gray-700'
+                              }`}
+                              onClick={() => setShowCategoriesMenu(false)}
+                              onMouseEnter={() => setHoveredCategoryId(cat.id)}
+                            >
+                              <span className="text-white font-medium">{cat.name}</span>
+                              {subcats.length > 0 && (
+                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                              )}
+                            </Link>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Right column: Subcategories (shows for hovered category) */}
+                    <div className="p-3 min-h-[200px]">
+                      {hoveredCategoryId ? (
+                        <div className="space-y-1">
+                          {getSubcategories(hoveredCategoryId).map((subcat) => (
+                            <Link
+                              key={subcat.id}
+                              href={`/categoria/${subcat.slug}`}
+                              className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
+                              onClick={() => setShowCategoriesMenu(false)}
+                            >
+                              {subcat.name}
+                            </Link>
+                          ))}
+                          {getSubcategories(hoveredCategoryId).length === 0 && (
+                            <p className="px-4 py-2 text-sm text-gray-500 italic">No hay subcategorías</p>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center h-full text-gray-500 text-sm">
+                          <p>Pasa el mouse sobre una categoría para ver más opciones</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* View all categories link */}
+                  <div className="border-t border-gray-700 p-3">
+                    <Link
+                      href="/categorias"
+                      className="block text-center text-sm text-blue-400 hover:text-blue-300 font-medium"
+                      onClick={() => setShowCategoriesMenu(false)}
+                    >
+                      Ver todas las categorías →
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Enlaces adicionales */}
+            <Link href="/categorias" className="text-sm text-gray-300 hover:text-white transition">
+              Categorías
+            </Link>
+            <Link href="/contacto" className="text-sm text-gray-300 hover:text-white transition">
+              Contacto
+            </Link>
           </div>
         </div>
       </div>
@@ -501,6 +526,13 @@ export default function Navbar() {
             <div className="flex-1">
               <SearchBar isMobile />
             </div>
+          </div>
+          {/* Mensaje de envío - móvil */}
+          <div className="flex items-center justify-center gap-2 mt-2 text-gray-300">
+            <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span className="text-xs font-medium">Envío a todo el país</span>
           </div>
         </div>
       </div>
